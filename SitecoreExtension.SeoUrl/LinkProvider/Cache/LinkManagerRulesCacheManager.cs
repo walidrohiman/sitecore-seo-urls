@@ -23,24 +23,5 @@ namespace SitecoreExtension.SeoUrl.LinkProvider.Cache
 
             return cache;
         }
-
-        //public static List<LinkManagerRulesCache> GetDatabaseRules(string databaseName)
-        //{
-        //    Assert.IsNotNullOrEmpty(databaseName, "Database (db) cannot be null.");
-
-        //    var caches = new List<LinkManagerRulesCache>();
-
-        //    var keys = Caches.Keys;
-
-        //    foreach (var key in keys)
-        //    {
-        //        if (key.EndsWith(databaseName))
-        //        {
-        //            caches.Add(Caches[key]);
-        //        }
-        //    }
-
-        //    return caches;
-        //}
     }
 }
