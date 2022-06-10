@@ -272,6 +272,7 @@
     <Compile Include="Cache\RewriteRuleResourceFile.cs" />
     <Compile Include="Cache\RulesCache.cs" />
     <Compile Include="Cache\UrlRuleCacheHelper.cs" />
+    <Compile Include="Command\PreviewExtensionCommand.cs" />
     <Compile Include="Helpers\ItemHelper.cs" />
     <Compile Include="Helpers\LinkHelper.cs" />
     <Compile Include="LinkProvider\Cache\LinkManagerRuleItem.cs" />

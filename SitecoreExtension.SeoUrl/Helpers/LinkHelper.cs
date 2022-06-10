@@ -7,6 +7,7 @@ using Sitecore.Configuration;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
 using Sitecore.Links;
+using Sitecore.Links.UrlBuilders;
 using Sitecore.Mvc.Extensions;
 using Sitecore.Sites;
 
@@ -79,5 +80,51 @@ namespace SitecoreExtension.SeoUrl.Helpers
         {
             ','
         }, StringSplitOptions.RemoveEmptyEntries)).ToList<string>();
+
+        public static string GetItemUrl(Item item, SiteContext siteContext)
+        {
+            var url = LinkManager.GetItemUrl(item, GetUrlOptions(siteContext));
+
+            if (IsAbsoluteUrl(url))
+            {
+                var uri = new Uri(url);
+                return uri.AbsolutePath;
+            }
+
+            return url;
+        }
+
+        public static string GetItemUrl(Item item)
+        {
+            return GetItemUrl(item, SiteContext.Current);
+        }
+
+        public static bool IsAbsoluteUrl(string url)
+        {
+            return Uri.TryCreate(url, UriKind.Absolute, out _);
+        }
+
+        public static ItemUrlBuilderOptions GetUrlOptions(SiteContext siteContext)
+        {
+            if (siteContext == null)
+            {
+                siteContext = SiteContext.Current;
+            }
+            var urlOptions = new ItemUrlBuilderOptions
+            {
+                AlwaysIncludeServerUrl = false,
+                LanguageEmbedding = LanguageEmbedding.Never,
+                UseDisplayName = true,
+                Site = siteContext,
+                EncodeNames = true,
+                LowercaseUrls = true
+
+            };
+            if (siteContext != null)
+            {
+                urlOptions.Language = Language.Parse(siteContext.Language);
+            }
+            return urlOptions;
+        }
     }
 }
